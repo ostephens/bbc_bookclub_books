@@ -29,8 +29,12 @@ page_add.each do |add|
   doc.xpath("//div[@class='box list-promos']/ul/li/a").each do |episodes|
       episode = Episode.new(episodes.attribute("href"),episodes.xpath("strong").inner_text)
       episode.getAuthor
-      puts episode.to_s
-      ScraperWiki.save(unique_keys=['episodeurl',], data={'episodeurl' => episode.url, 'booktitle' => episode.booktitle, 'author' => episode.bookauthor})
+      data = {
+      episodeurl: episode.url.to_s,
+      booktitle: episode.booktitle.to_s,
+      author: episode.bookauthor.to_s
+      }
+      ScraperWiki::save_sqlite([], data)
   end
 end
 
