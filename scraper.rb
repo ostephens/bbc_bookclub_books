@@ -27,10 +27,9 @@ page_add.each do |add|
   html = ScraperWiki.scrape(url)
   doc = Nokogiri::HTML(html)
   doc.xpath("//div[@class='box list-promos']/ul/li/a").each do |episodes|
-      puts "got episode"
-      puts episodes.to_s
       episode = Episode.new(episodes.attribute("href"),episodes.xpath("strong").inner_text)
       episode.getAuthor
+      puts episode.to_s
       ScraperWiki.save(unique_keys=['episodeurl',], data={'episodeurl' => episode.url, 'booktitle' => episode.booktitle, 'author' => episode.bookauthor})
   end
 end
