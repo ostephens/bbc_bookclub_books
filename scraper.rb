@@ -1,3 +1,4 @@
+require 'scraperwiki'
 require 'nokogiri'
 
 class Episode
